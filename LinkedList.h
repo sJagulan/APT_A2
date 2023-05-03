@@ -30,6 +30,9 @@ public:
 
     // print the list
     void print();
+
+    // print items for menu
+    void print_items();
 private:
     // the beginning of the list
     Node *head;

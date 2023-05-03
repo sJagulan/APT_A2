@@ -156,3 +156,33 @@ void LinkedList::print()
         current = current->next;
     }
 }
+
+void LinkedList::print_items(){
+    std::cout << "Items Menu" << std::endl;
+    std::cout << "----------" << std::endl;
+    std::cout << "ID   |Name";
+    for (int i = 0; i < 10; i++){
+        std::cout << " ";
+    }
+    std::cout << "| Available | Price" << std::endl;
+    for (int i = 0; i < 40; i++){
+        std::cout << "-";
+    }
+    std::cout << std::endl;
+    Node *current = head;
+    while (current != nullptr)
+    {
+        std::cout << current->data->id << "|";
+        int spaces = 14;
+        std::cout << current->data->name;
+        for (int i = 0; i < 14-(current->data->name.length()); i++){
+            std::cout <<  " "; 
+        }
+        std::cout << "|" << current->data->on_hand;
+        for (int i = 0; i < 11-std::to_string(current->data->on_hand).length(); i++){
+            std::cout <<  " "; 
+        }
+        std::cout << "|" << (current->data->price.dollars) << "." << (current->data->price.cents) << std::endl;
+        current = current->next;
+    }
+}

@@ -5,6 +5,30 @@
 
 LinkedList stockList;
 
+void display_menu(bool admin){
+    if (admin == true){
+        std::cout << "Main Menu:" << std::endl;
+        std::cout << "\t1. Display Items" << std::endl;
+        std::cout << "\t2. Purchase Items" << std::endl;
+        std::cout << "\t3. Save and Exit" << std::endl;
+        std::cout << "Administrator-Only Menu:" << std::endl;
+        std::cout << "\t4. Add Item" << std::endl;
+        std::cout << "\t5. Remove Item" << std::endl;
+        std::cout << "\t6. Display Coins" << std::endl;
+        std::cout << "\t7. Reset Stock" << std::endl;
+        std::cout << "\t8. Reset Coins" << std::endl;
+        std::cout << "\t9. Abort Program" << std::endl;
+        std::cout << "Select your option (1-9): " << std::endl;
+    }
+    else {
+        std::cout << "Main Menu:" << std::endl;
+        std::cout << "\t1. Display Items" << std::endl;
+        std::cout << "\t2. Purchase Items" << std::endl;
+        std::cout << "\t3. Save and Exit" << std::endl;
+    }
+}
+
+
 int add_item(void)
 {
     // The id of the new stock will be: I0006
@@ -83,10 +107,11 @@ int main(int argc, char **argv)
     add_item();
     add_item();
     //add_item();
-    remove_item();
-    /* print stockList */
-    stockList.print();
-    stockList.clear();
+    // remove_item();
+    // /* print stockList */
+    // stockList.print();
+    // stockList.clear();
+    stockList.print_items();
 
     return EXIT_SUCCESS;
 }
