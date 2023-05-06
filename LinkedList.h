@@ -33,6 +33,7 @@ public:
 
     // print items for menu
     void print_items();
+    void reset_all_stock_counts_to_default();
 private:
     // the beginning of the list
     Node *head;
