@@ -102,6 +102,18 @@ int remove_item()
 int main(int argc, char **argv)
 {
     /* validate command line arguments */
+    if (argc != 3) {
+        std::cerr << "Usage: " << argv[0] << " <stockfile> <coinsfile>" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    std::string stockFile = argv[1];
+    std::string coinsFile = argv[2];
+
+    std::cout << "Stock file: " << stockFile << std::endl;
+    std::cout << "Coins file: " << coinsFile << std::endl;
+
+    
     std::cout << "Just a test, nothing implemented yet!" << std::endl;
 
     add_item();
