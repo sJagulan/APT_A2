@@ -186,3 +186,11 @@ void LinkedList::print_items(){
         current = current->next;
     }
 }
+void LinkedList::reset_all_stock_counts_to_default()
+{
+    Node* current = head;
+    while (current != nullptr) {
+        current->data->on_hand = DEFAULT_STOCK_LEVEL;
+        current = current->next;
+    }
+}
