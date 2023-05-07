@@ -17,13 +17,18 @@ enum Denomination
 class Coin
 {
 public:
-    // the denomination type
+    Coin();
+    Coin(Denomination denomination, int count);
     enum Denomination denom;
-    void load_coin_data(const std::string &coinsfile);
+    bool load_coin_data(const std::string &coinsfile);
     void reset_coin_count();
     void display_coins();
-    // the count of how many of these are in the cash register
+    std::string denom_to_string(Denomination denom);
+    int get_count_for_denomination(Denomination denom);
     unsigned count;
+    // the count of how many of these are in the cash register
+    Coin* next;
+    static Coin* coins_head;
 };
 
 #endif // COIN_H
