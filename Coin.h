@@ -1,4 +1,5 @@
 #ifndef COIN_H
+#include <string>
 #define COIN_H
 
 // Coin.h defines the coin structure for managing currency in the system. 
@@ -18,6 +19,13 @@ class Coin
 {
 public:
     Coin();
+    Coin(int denom, unsigned int qty) : denomination(denom), quantity(qty) {
+        // Constructor implementation
+    }
+
+    int denomination;
+    unsigned int quantity;
+
     Coin(Denomination denomination, int count);
     enum Denomination denom;
     bool load_coin_data(const std::string &coinsfile);

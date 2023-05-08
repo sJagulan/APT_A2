@@ -1,6 +1,7 @@
 #include "Coin.h"
 #include "Node.h"
 #include <iostream>
+#include <sstream>
 #include <fstream>
 
 Coin* Coin::coins_head = nullptr;

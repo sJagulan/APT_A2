@@ -1,6 +1,9 @@
 #include <iostream>
+#include <vector>
 #include <iomanip>
 #include <sstream>
+#include <fstream>
+#include "coin.h"
 #include "LinkedList.h"
 
 LinkedList stockList;
@@ -94,14 +97,46 @@ int remove_item()
     return 0;
 }
 
+
+
+// Add this function to load coins data from the file
+void load_coins(const std::string &coins_file, std::vector<Coin> &coins) {
+    std::ifstream infile(coins_file);
+    if (!infile) {
+        std::cerr << "Error: Unable to open coins file." << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    std::string line;
+    while (std::getline(infile, line)) {
+        std::stringstream ss(line);
+        int denom;
+        unsigned quantity;
+
+        if (std::getline(ss, line, ',')) {
+            denom = std::stoi(line);
+        } else {
+            std::cerr << "Error: Invalid coins file format." << std::endl;
+            exit(EXIT_FAILURE);
+        }
+
+        if (std::getline(ss, line, ',')) {
+            quantity = std::stoi(line);
+        } else {
+            std::cerr << "Error: Invalid coins file format." << std::endl;
+            exit(EXIT_FAILURE);
+        }
+
+        coins.push_back(Coin(denom, quantity));
+    }
+}
+
 /**
  * manages the running of the program, initialises data structures, loads
  * data, display the main menu, and handles the processing of options.
  * Make sure free memory and close all files before exiting the program.
  **/
-int main(int argc, char **argv)
-{
-    /* validate command line arguments */
+int main(int argc, char **argv) {
     if (argc != 3) {
         std::cerr << "Usage: " << argv[0] << " <stockfile> <coinsfile>" << std::endl;
         return EXIT_FAILURE;
@@ -110,11 +145,51 @@ int main(int argc, char **argv)
     std::string stockFile = argv[1];
     std::string coinsFile = argv[2];
 
-    std::cout << "Stock file: " << stockFile << std::endl;
-    std::cout << "Coins file: " << coinsFile << std::endl;
+    // Load stock data
+    std::ifstream infile(stockFile);
+    if (!infile) {
+        std::cerr << "Error: Unable to open stock file." << std::endl;
+        return EXIT_FAILURE;
+    }
 
+    std::string line;
+    while (std::getline(infile, line)) {
+        std::stringstream ss(line);
+        Stock *newItem = new Stock;
+
+        if (std::getline(ss, newItem->id, '|') &&
+            std::getline(ss, newItem->name, '|') &&
+            std::getline(ss, newItem->description, '|')) {
+
+            std::string price_str;
+            if (std::getline(ss, price_str, '|')) {
+                newItem->price = Price::parsePrice(price_str);
+            } else {
+                std::cerr << "Error: Invalid stock file format." << std::endl;
+                exit(EXIT_FAILURE);
+            }
+
+            if (std::getline(ss, line, '|')) {
+                newItem->on_hand = std::stoi(line);
+            } else {
+                std::cerr << "Error: Invalid stock file format." << std::endl;
+                exit(EXIT_FAILURE);
+            }
+
+            stockList.insert(newItem);
+        } else {
+            std::cerr << "Error: Invalid stock file format." << std::endl;
+            exit(EXIT_FAILURE);
+        }
+    }
+    infile.close();
+
+    // Load coins data
+    std::vector<Coin> coins;
+    load_coins(coinsFile, coins);
     
-    std::cout << "Just a test, nothing implemented yet!" << std::endl;
+    //std::cout << "Just a test, nothing implemented yet!" << std::endl;
+
 
     add_item();
     add_item();
