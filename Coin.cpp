@@ -111,3 +111,34 @@ std::string Coin::denom_to_string(Denomination denom) {
             return "Unknown";
     }
 }
+
+bool Coin::is_valid(int num){
+
+    if (num == 1000){
+        return true;
+    }
+    else if (num == 500){
+        return true;
+    }
+    else if (num == 200){
+        return true;
+    }
+    else if (num == 100){
+        return true;
+    }
+    else if (num == 50){
+        return true;
+    }
+    else if (num == 20){
+        return true;
+    }
+    else if (num == 10){
+        return true;
+    }
+    else if (num == 5){
+        return true;
+    }
+    else {
+        return false;
+    }
+}

@@ -161,7 +161,7 @@ void LinkedList::print_items(){
     std::cout << "Items Menu" << std::endl;
     std::cout << "----------" << std::endl;
     std::cout << "ID   |Name";
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < 20; i++){
         std::cout << " ";
     }
     std::cout << "| Available | Price" << std::endl;
@@ -175,7 +175,7 @@ void LinkedList::print_items(){
         std::cout << current->data->id << "|";
         int spaces = 14;
         std::cout << current->data->name;
-        for (int i = 0; i < 14-(current->data->name.length()); i++){
+        for (int i = 0; i < 24-(current->data->name.length()); i++){
             std::cout <<  " "; 
         }
         std::cout << "|" << current->data->on_hand;
@@ -192,5 +192,43 @@ void LinkedList::reset_all_stock_counts_to_default()
     while (current != nullptr) {
         current->data->on_hand = DEFAULT_STOCK_LEVEL;
         current = current->next;
+    }
+}
+
+void LinkedList::purchase_item(const std::string &id){
+    Stock *result = nullptr;
+    // find item by id
+    Node *current = head;
+    Node *prev = nullptr;
+    while (current != nullptr)
+    {
+        if (current->data->id == id)
+        {
+            break;
+        }
+        prev = current;
+        current = current->next;
+    }
+
+    // if the item is not found, return false
+    if (current == nullptr)
+    {
+        std::cout << "id is not found";
+    }
+    else{
+        std::cout << "You have selected \"" << current->data->name << "\". This will cost you $";
+        std::cout << current->data->price.dollars << "." << current->data->price.cents << std::endl;  
+        float total = current->data->price.dollars + current->data->price.cents*(0.01);
+        int paid;
+        while (total > 0){
+            std::cout << "you still need to pay: $" << total << std::endl;
+            std::cin >> paid;
+            if(Coin::is_valid(paid)){
+                total = total - paid/100;
+            }
+            else{
+                std::cout << "Error: $" << paid << " is not a valid denomination of Money. Please try again" << std::endl; 
+            }
+        }
     }
 }

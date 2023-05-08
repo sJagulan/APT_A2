@@ -28,6 +28,7 @@ void display_menu(bool admin){
         std::cout << "\t1. Display Items" << std::endl;
         std::cout << "\t2. Purchase Items" << std::endl;
         std::cout << "\t3. Save and Exit" << std::endl;
+        std::cout << "Select your option (1-3): " << std::endl;
     }
 }
 
@@ -131,6 +132,8 @@ void load_coins(const std::string &coins_file, std::vector<Coin> &coins) {
     }
 }
 
+
+
 /**
  * manages the running of the program, initialises data structures, loads
  * data, display the main menu, and handles the processing of options.
@@ -189,16 +192,42 @@ int main(int argc, char **argv) {
     load_coins(coinsFile, coins);
     
     //std::cout << "Just a test, nothing implemented yet!" << std::endl;
-
-
-    add_item();
-    add_item();
-    //add_item();
-    // remove_item();
-    // /* print stockList */
-    // stockList.print();
-    // stockList.clear();
-    stockList.print_items();
-
+    std::string inp;
+    while(inp != "3" && inp != "9"){
+        display_menu(true);
+        std::getline(std::cin, inp);
+        if (inp == "1"){
+            stockList.print_items();
+        }
+        if (inp == "2"){
+            std::cout << "Purchase Item" << std::endl;
+            std::cout << "-------------" << std::endl;
+            std::cout << "Please enter the id of the item you wish to purchase:" << std::endl;
+            std::string choice;
+            std::getline(std::cin, choice);
+            stockList.purchase_item(choice);
+        }
+        if (inp == "4"){
+            add_item();
+        }
+        if (inp == "5"){
+            remove_item();
+        }
+        if (inp == "6"){
+            Coin::coins_head->display_coins();
+            // display coins 
+            // @Jagulan not sure how you want me to implement this
+        }
+        if (inp == "7"){
+            stockList.reset_all_stock_counts_to_default();
+        }
+        if (inp == "8"){
+            // @Jagulan not sure how to implement reset coin function either
+        }
+    }
+    if (inp == "3"){
+        // @Guanchen dont know where to find save and exit function
+        std::cout << "Saved and Exit" << std::endl;
+    }
     return EXIT_SUCCESS;
 }

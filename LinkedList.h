@@ -1,6 +1,7 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 #include "Node.h"
+#include "Coin.h"
 
 class LinkedList
 {
@@ -33,7 +34,12 @@ public:
 
     // print items for menu
     void print_items();
+
+    //purchase items by id
+    void purchase_item(const std::string &id);
+
     void reset_all_stock_counts_to_default();
+
 private:
     // the beginning of the list
     Node *head;

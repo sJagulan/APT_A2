@@ -25,6 +25,7 @@ public:
 
     int denomination;
     unsigned int quantity;
+    static bool is_valid(int num);
 
     Coin(Denomination denomination, int count);
     enum Denomination denom;
