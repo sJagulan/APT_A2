@@ -101,7 +101,7 @@ int remove_item()
 
 
 // Add this function to load coins data from the file
-void load_coins(const std::string &coins_file, std::vector<Coin> &coins) {
+void load_coins(const std::string &coins_file, Coin* &coins_head) {
     std::ifstream infile(coins_file);
     if (!infile) {
         std::cerr << "Error: Unable to open coins file." << std::endl;
@@ -109,6 +109,7 @@ void load_coins(const std::string &coins_file, std::vector<Coin> &coins) {
     }
 
     std::string line;
+    Coin* last_coin = nullptr;
     while (std::getline(infile, line)) {
         std::stringstream ss(line);
         int denom;
@@ -128,7 +129,13 @@ void load_coins(const std::string &coins_file, std::vector<Coin> &coins) {
             exit(EXIT_FAILURE);
         }
 
-        coins.push_back(Coin(denom, quantity));
+        Coin* new_coin = new Coin(denom, quantity);
+        if (last_coin == nullptr) {
+            coins_head = new_coin;
+        } else {
+            last_coin->next = new_coin;
+        }
+        last_coin = new_coin;
     }
 }
 
@@ -188,8 +195,8 @@ int main(int argc, char **argv) {
     infile.close();
 
     // Load coins data
-    std::vector<Coin> coins;
-    load_coins(coinsFile, coins);
+    Coin* coins_head = nullptr;
+    load_coins(coinsFile, coins_head);
     
     //std::cout << "Just a test, nothing implemented yet!" << std::endl;
     std::string inp;
@@ -213,17 +220,27 @@ int main(int argc, char **argv) {
         if (inp == "5"){
             remove_item();
         }
-        if (inp == "6"){
-            Coin::coins_head->display_coins();
-            // display coins 
-            // @Jagulan not sure how you want me to implement this
+        
+        if (inp == "6") {
+            if (coins_head != nullptr) {
+                coins_head->display_coins();
+            } 
+            else {
+                std::cout << "No coins available." << std::endl;
+            }
         }
         if (inp == "7"){
             stockList.reset_all_stock_counts_to_default();
         }
-        if (inp == "8"){
-            // @Jagulan not sure how to implement reset coin function either
+        if (inp == "8") {
+            if (coins_head != nullptr) {
+                coins_head->reset_coin_count();
+            } 
+            else {
+                std::cout << "No coins available to reset." << std::endl;
+            }
         }
+        
     }
     if (inp == "3"){
         // @Guanchen dont know where to find save and exit function
