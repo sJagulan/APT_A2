@@ -176,13 +176,13 @@ void LinkedList::print_items(){
     while (current != nullptr)
     {
         std::cout << current->data->id << "|";
-        int spaces = 14;
+        // int spaces = 14;
         std::cout << current->data->name;
-        for (int i = 0; i < 24-(current->data->name.length()); i++){
+        for (unsigned int i = 0; i < 24-(current->data->name.length()); i++){
             std::cout <<  " "; 
         }
         std::cout << "|" << current->data->on_hand;
-        for (int i = 0; i < 11-std::to_string(current->data->on_hand).length(); i++){
+        for (unsigned int i = 0; i < 11-std::to_string(current->data->on_hand).length(); i++){
             std::cout <<  " "; 
         }
         std::cout << "|" << (current->data->price.dollars) << "." << (current->data->price.cents) << std::endl;
@@ -198,24 +198,20 @@ void LinkedList::reset_all_stock_counts_to_default()
     }
 }
 
-Node* LinkedList::get_head()
-const {
-    return head;
-}
-
 
 void LinkedList::purchase_item(const std::string &id){
-    Stock *result = nullptr;
+    // Stock *result = nullptr;
     // find item by id
     Node *current = head;
-    Node *prev = nullptr;
+    // Node *prev = nullptr;
+    
     while (current != nullptr)
     {
         if (current->data->id == id)
         {
             break;
         }
-        prev = current;
+        // prev = current;
         current = current->next;
     }
 
