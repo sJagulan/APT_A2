@@ -20,6 +20,9 @@ unsigned LinkedList::size() const
 {
     return count;
 }
+Node* LinkedList::get_head() const {
+    return head;
+}
 
 void LinkedList::insert(Stock *data)
 {
