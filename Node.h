@@ -36,6 +36,7 @@ public:
 
     // parse a price string in format of dollars.cents
     static Price parsePrice(const std::string &price);
+     double getPrice() const;
 };
 
 /**
