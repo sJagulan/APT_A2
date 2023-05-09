@@ -110,6 +110,7 @@ void save_stock_data(const std::string &stock_file, const LinkedList &stock_list
     }
 
     Node *current = stock_list.get_head();
+    std::cout << "Hi";
     while (current != nullptr) {
         Stock *item = current->data;
         outfile << item->id << "|" << item->name << "|" << item->description << "|"
