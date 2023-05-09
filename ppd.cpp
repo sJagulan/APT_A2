@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <sstream>
 #include <fstream>
-#include "coin.h"
+#include "Coin.h"
 #include "LinkedList.h"
 
 LinkedList stockList;
