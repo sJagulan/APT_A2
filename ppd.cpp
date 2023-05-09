@@ -108,16 +108,15 @@ void save_stock_data(const std::string &stock_file, const LinkedList &stock_list
         std::cerr << "Error: Unable to open stock file for writing." << std::endl;
         exit(EXIT_FAILURE);
     }
-
+ 
     Node *current = stock_list.get_head();
-    std::cout << "Hi";
     while (current != nullptr) {
         Stock *item = current->data;
         outfile << item->id << "|" << item->name << "|" << item->description << "|"
                 << priceToString(item->price.getPrice()) << "|" << item->on_hand << std::endl;
         current = current->next;
     }
-
+ 
     outfile.close();
 }
 

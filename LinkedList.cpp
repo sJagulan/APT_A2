@@ -195,6 +195,12 @@ void LinkedList::reset_all_stock_counts_to_default()
     }
 }
 
+Node* LinkedList::get_head()
+const {
+    return head;
+}
+
+
 void LinkedList::purchase_item(const std::string &id){
     Stock *result = nullptr;
     // find item by id

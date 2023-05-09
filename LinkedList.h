@@ -40,6 +40,8 @@ public:
 
     void reset_all_stock_counts_to_default();
 
+    Node* get_head() const;
+
 private:
     // the beginning of the list
     Node *head;
