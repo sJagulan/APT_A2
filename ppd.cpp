@@ -97,7 +97,44 @@ int remove_item()
 
     return 0;
 }
+std::string priceToString(double price) {
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(2) << price;
+    return ss.str();
+}
+void save_stock_data(const std::string &stock_file, const LinkedList &stock_list) {
+    std::ofstream outfile(stock_file);
+    if (!outfile) {
+        std::cerr << "Error: Unable to open stock file for writing." << std::endl;
+        exit(EXIT_FAILURE);
+    }
 
+    Node *current = stock_list.get_head();
+    while (current != nullptr) {
+        Stock *item = current->data;
+        outfile << item->id << "|" << item->name << "|" << item->description << "|"
+                << priceToString(item->price.getPrice()) << "|" << item->on_hand << std::endl;
+        current = current->next;
+    }
+
+    outfile.close();
+}
+
+void save_coin_data(const std::string &coins_file, const Coin *coins_list) {
+    std::ofstream outfile(coins_file);
+    if (!outfile) {
+        std::cerr << "Error: Unable to open coins file for writing." << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    Coin *current = coins_list->coins_head;
+    while (current != nullptr) {
+        outfile << static_cast<int>(current->denom) << "," << current->count << std::endl;
+        current = current->next;
+    }
+
+    outfile.close();
+}
 
 
 // Add this function to load coins data from the file
@@ -243,8 +280,9 @@ int main(int argc, char **argv) {
         
     }
     if (inp == "3"){
-        // @Guanchen dont know where to find save and exit function
-        std::cout << "Saved and Exit" << std::endl;
+        save_stock_data(stockFile, stockList);
+        save_coin_data(coinsFile, Coin::coins_head);
+        std::cout << "Data saved. Exiting program." << std::endl;
     }
     return EXIT_SUCCESS;
 }
