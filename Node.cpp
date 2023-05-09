@@ -24,3 +24,7 @@ Price Price::parsePrice(const std::string &price)
     p.cents = std::stoi(std::string(dot_pos + 1, price.end()));
     return p;
 };
+double Price::getPrice() const
+{
+    return static_cast<double>(dollars) + static_cast<double>(cents) / 100.0;
+}
