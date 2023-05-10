@@ -233,7 +233,7 @@ int main(int argc, char **argv) {
 
     // Load coins data
     Coin* coins_head = nullptr;
-    load_coins(coinsFile, coins_head);
+    load_coins("coins.dat", coins_head);
     
     //std::cout << "Just a test, nothing implemented yet!" << std::endl;
     std::string inp;
@@ -271,12 +271,13 @@ int main(int argc, char **argv) {
         }
         if (inp == "8") {
             if (coins_head != nullptr) {
-                coins_head->reset_coin_count();
+                Coin coins;
+                coins.reset_coin_count();
             } 
             else {
                 std::cout << "No coins available to reset." << std::endl;
             }
-        }
+    }
         
     }
     if (inp == "3"){

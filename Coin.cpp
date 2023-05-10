@@ -26,21 +26,31 @@ bool Coin::load_coin_data(const std::string &coinsfile)
         return false;
     }
 
-    int denomination, count;
-    while (infile >> denomination >> count)
+    std::string line;
+    while (std::getline(infile, line))
     {
-        // Create a new Coin object and insert it into the linked list in ascending order of denomination.
-        Coin* new_coin = new Coin(static_cast<Denomination>(denomination), count);
-        if (coins_head == nullptr || coins_head->denom > new_coin->denom) {
-            new_coin->next = coins_head;
-            coins_head = new_coin;
-        } else {
-            Coin* current = coins_head;
-            while (current->next != nullptr && current->next->denom < new_coin->denom) {
-                current = current->next;
+        std::stringstream ss(line);
+        std::string denominationStr, countStr;
+
+        // Extract denomination and count from line
+        if (std::getline(ss, denominationStr, ',') && std::getline(ss, countStr, ','))
+        {
+            int denomination = std::stoi(denominationStr);
+            int count = std::stoi(countStr);
+
+            // Create a new Coin object and insert it into the linked list in ascending order of denomination.
+            Coin* new_coin = new Coin(static_cast<Denomination>(denomination), count);
+            if (coins_head == nullptr || coins_head->denom > new_coin->denom) {
+                new_coin->next = coins_head;
+                coins_head = new_coin;
+            } else {
+                Coin* current = coins_head;
+                while (current->next != nullptr && current->next->denom < new_coin->denom) {
+                    current = current->next;
+                }
+                new_coin->next = current->next;
+                current->next = new_coin;
             }
-            new_coin->next = current->next;
-            current->next = new_coin;
         }
     }
 
