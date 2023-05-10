@@ -239,7 +239,7 @@ int main(int argc, char **argv) {
     std::string inp;
     while(inp != "3" && inp != "9"){
         display_menu(true);
-        std::getline(std::cin, inp);
+        std::getline(std::cin >> std::ws, inp);
         if (inp == "1"){
             stockList.print_items();
         }

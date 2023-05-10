@@ -204,8 +204,7 @@ void LinkedList::purchase_item(const std::string &id){
     // find item by id
     Node *current = head;
     Node *prev = nullptr;
-    
-while (current != nullptr && current->data->id != id){
+    while (current != nullptr && current->data->id != id){
         prev = current;
         current = current->next;
     }
@@ -235,3 +234,5 @@ while (current != nullptr && current->data->id != id){
         }
     }
 }
+
+
