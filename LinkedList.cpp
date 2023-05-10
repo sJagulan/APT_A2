@@ -203,15 +203,10 @@ void LinkedList::purchase_item(const std::string &id){
     // Stock *result = nullptr;
     // find item by id
     Node *current = head;
-    // Node *prev = nullptr;
+    Node *prev = nullptr;
     
-    while (current != nullptr)
-    {
-        if (current->data->id == id)
-        {
-            break;
-        }
-        // prev = current;
+while (current != nullptr && current->data->id != id){
+        prev = current;
         current = current->next;
     }
 
@@ -224,6 +219,8 @@ void LinkedList::purchase_item(const std::string &id){
         std::cout << "You have selected \"" << current->data->name << "\". This will cost you $";
         std::cout << current->data->price.dollars << "." << current->data->price.cents << std::endl;  
         float total = current->data->price.dollars + current->data->price.cents*(0.01);
+        //deduct from stock
+        current->data->on_hand = current->data->on_hand - 1;
         int paid;
         while (total > 0){
             std::cout << "you still need to pay: $" << total << std::endl;
@@ -234,6 +231,7 @@ void LinkedList::purchase_item(const std::string &id){
             else{
                 std::cout << "Error: $" << paid << " is not a valid denomination of Money. Please try again" << std::endl; 
             }
+            
         }
     }
 }
