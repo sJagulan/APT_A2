@@ -284,5 +284,7 @@ int main(int argc, char **argv) {
         save_coin_data(coinsFile, Coin::coins_head);
         std::cout << "Data saved. Exiting program." << std::endl;
     }
+    
+    stockList.clear();
     return EXIT_SUCCESS;
 }
