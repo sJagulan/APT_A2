@@ -199,7 +199,7 @@ void LinkedList::reset_all_stock_counts_to_default()
 }
 
 
-void LinkedList::purchase_item(const std::string &id){
+void LinkedList::purchase_item(const std::string &id, Coin* coins_head){
     // Stock *result = nullptr;
     // find item by id
     Node *current = head;
@@ -224,8 +224,9 @@ void LinkedList::purchase_item(const std::string &id){
         while (total > 0){
             std::cout << "you still need to pay: $" << total << std::endl;
             std::cin >> paid;
-            if(Coin::is_valid(paid)){
+            if(Coin::int_to_denom(paid) != static_cast<Denomination>(-1)){
                 total = total - paid/100;
+                coins_head->deduct_coin(Coin::int_to_denom(paid));
             }
             else{
                 std::cout << "Error: $" << paid << " is not a valid denomination of Money. Please try again" << std::endl; 

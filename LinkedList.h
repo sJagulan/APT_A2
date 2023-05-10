@@ -36,7 +36,7 @@ public:
     void print_items();
 
     //purchase items by id
-    void purchase_item(const std::string &id);
+    void purchase_item(const std::string &id, Coin* coins_head);
 
     void reset_all_stock_counts_to_default();
 

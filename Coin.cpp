@@ -112,33 +112,44 @@ std::string Coin::denom_to_string(Denomination denom) {
     }
 }
 
-bool Coin::is_valid(int num){
+Denomination Coin::int_to_denom(int num){
 
     if (num == 1000){
-        return true;
+        return TEN_DOLLARS;
     }
     else if (num == 500){
-        return true;
+        return FIVE_DOLLARS;
     }
     else if (num == 200){
-        return true;
+        return TWO_DOLLARS;
     }
     else if (num == 100){
-        return true;
+        return ONE_DOLLAR;
     }
     else if (num == 50){
-        return true;
+        return FIFTY_CENTS;
     }
     else if (num == 20){
-        return true;
+        return TWENTY_CENTS;
     }
     else if (num == 10){
-        return true;
+        return TEN_CENTS;
     }
     else if (num == 5){
-        return true;
+        return FIVE_CENTS;
     }
     else {
-        return false;
+        return static_cast<Denomination>(-1);
     }
 }
+
+void Coin::deduct_coin(Denomination denomination){
+    Coin* current = coins_head;
+    while (current != nullptr) {
+        if (current->denom == denom) {
+            current->count = current->count - 1;
+        }
+        current = current->next;
+    }
+}
+

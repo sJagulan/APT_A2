@@ -249,7 +249,7 @@ int main(int argc, char **argv) {
             std::cout << "Please enter the id of the item you wish to purchase:" << std::endl;
             std::string choice;
             std::getline(std::cin, choice);
-            stockList.purchase_item(choice);
+            stockList.purchase_item(choice, coins_head);
         }
         if (inp == "4"){
             add_item();

@@ -25,11 +25,12 @@ public:
 
     int denomination;
     unsigned int quantity;
-    static bool is_valid(int num);
+    static Denomination int_to_denom(int num);
 
     Coin(Denomination denomination, int count);
     enum Denomination denom;
     bool load_coin_data(const std::string &coinsfile);
+    void deduct_coin(Denomination denomination);
     void reset_coin_count();
     void display_coins();
     std::string denom_to_string(Denomination denom);
