@@ -90,36 +90,40 @@ void Coin::display_coins() {
     std::cout << "Denomination | Count\n";
     std::cout << "---------------------------\n";
 
+    // Create an array with the actual integer denominations
+    int denominations[] = {5, 10, 20, 50, 100, 200, 500, 1000};
+
     for (int i = 0; i < 8; i++) {
-        Denomination denom = static_cast<Denomination>(i);
+        // Convert the integer denomination to the corresponding enum value for the denom_to_string call
+        Denomination denom = int_to_denom(denominations[i]);
         std::string denomStr = denom_to_string(denom);
+        // Call get_count_for_denomination with the Denomination denom
         int count = get_count_for_denomination(denom);
 
         std::cout << denomStr << " | " << count << std::endl;
     }
 }
 
+
 std::string Coin::denom_to_string(Denomination denom) {
-    switch (denom) {
-        case Denomination::FIVE_CENTS:
-            return "5";
-        case Denomination::TEN_CENTS:
-            return "10";
-        case Denomination::TWENTY_CENTS:
-            return "20";
-        case Denomination::FIFTY_CENTS:
-            return "50";
-        case Denomination::ONE_DOLLAR:
-            return "100";
-        case Denomination::TWO_DOLLARS:
-            return "200";
-        case Denomination::FIVE_DOLLARS:
-            return "500";
-        case Denomination::TEN_DOLLARS:
-            return "1000";
-        default:
-            return "Unknown";
-    }
+    if (denom == FIVE_CENTS)
+        return "5 Cents";
+    else if (denom == TEN_CENTS)
+        return "10 Cents";
+    else if (denom == TWENTY_CENTS)
+        return "20 Cents";
+    else if (denom == FIFTY_CENTS)
+        return "50 Cents";
+    else if (denom == ONE_DOLLAR)
+        return "1 Dollar";
+    else if (denom == TWO_DOLLARS)
+        return "2 Dollars";
+    else if (denom == FIVE_DOLLARS)
+        return "5 Dollars";
+    else if (denom == TEN_DOLLARS)
+        return "10 Dollars";
+    else
+        return "Unknown";
 }
 
 Denomination Coin::int_to_denom(int num){
