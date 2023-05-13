@@ -95,12 +95,14 @@ void Coin::display_coins() {
 
     for (int i = 0; i < 8; i++) {
         // Convert the integer denomination to the corresponding enum value for the denom_to_string call
-        Denomination denom = int_to_denom(denominations[i]);
+        Denomination denom = static_cast<Denomination>(int_to_denom(denominations[i]));
+        // debug denom
+        //std::cout << "denom: " << denom << std::endl;
         std::string denomStr = denom_to_string(denom);
         // Call get_count_for_denomination with the Denomination denom
-        int count = get_count_for_denomination(denom);
+        //int count = get_count_for_denomination(denom);
 
-        std::cout << denomStr << " | " << count << std::endl;
+        std::cout << denomStr << " | " << denom << std::endl;
     }
 }
 
